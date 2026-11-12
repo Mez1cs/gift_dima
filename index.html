@@ -2,45 +2,75 @@
 <html lang="ru">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>С днём рождения!</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Уровень 1 — с днём рождения!</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&family=Unbounded:wght@600;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/global.css" />
-    <link rel="stylesheet" href="css/header.css" />
-    <link rel="stylesheet" href="css/main-page.css" />
+    <link rel="stylesheet" href="css/style.css" />
   </head>
-  <body>
-    <header class="header">
-      <a class="header__logo" href="#top">Для <span data-name></span></a>
-      <nav class="header__nav" aria-label="Основная навигация">
-        <a href="#wishes">Пожелания</a>
-      </nav>
-    </header>
+  <body data-level="1" data-from="1" data-to="6" data-next="level2.html">
+    <div class="bg" style="background-image: url('assets/bg1.jpg')"></div>
 
-    <main class="main" id="top">
-      <section class="hero">
-        <h1 class="hero__title">
-          С днём<br />рождения,<br /><span data-name></span>!
-        </h1>
-        <p class="hero__text">
-          Это небольшой сайт, который я сделал специально для тебя.
-        </p>
-        <a class="hero__button" href="#wishes">Читать пожелания</a>
+    <div class="app" id="app">
+      <!-- Шапка: инструкция и счётчик -->
+      <header class="top">
+        <p class="top__guide">Сбивай звёзды: «вверх» и «вниз» меняют дорожку, кнопка с прицелом стреляет.</p>
+        <div class="top__count">#<span id="count">0</span>/<span id="total">18</span> ☆</div>
+      </header>
+
+      <!-- Игровое поле -->
+      <div class="field" id="field" style="background-image: url('assets/bg1.jpg')">
+        <canvas id="canvas"></canvas>
+        <div class="over" id="over" hidden>
+          <h2 class="over__title">Игра окончена</h2>
+          <p>Звезда долетела до тебя. Тапни по полю, чтобы начать уровень заново.</p>
+        </div>
+      </div>
+
+      <!-- Управление -->
+      <div class="controls" id="controls">
+        <div class="controls__move">
+          <button class="pad pad--move" id="upBtn" type="button" aria-label="Вверх"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 L3 14 H9 V21 H15 V14 H21 Z" fill="currentColor"/></svg></button>
+          <button class="pad pad--move" id="downBtn" type="button" aria-label="Вниз"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21 L3 10 H9 V3 H15 V10 H21 Z" fill="currentColor"/></svg></button>
+        </div>
+        <button class="pad pad--fire" id="fireBtn" type="button" aria-label="Огонь"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="6.5"/><path d="M12 2v6M12 16v6M2 12h6M16 12h6"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg></button>
+      </div>
+
+      <!-- Собранные фрагменты поздравления -->
+      <section class="panel" aria-label="Фрагменты поздравления">
+        <ol class="chips" id="chips"></ol>
       </section>
 
-      <section class="wishes" id="wishes">
-        <h2 class="wishes__title">Что я хочу тебе пожелать</h2>
-        <p class="wishes__text">
-          Здесь будет тёплое поздравление. Текст добавим в следующих правках.
-        </p>
-      </section>
-    </main>
+      <!-- Правила -->
+      <div class="backdrop" id="rules">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="rulesTitle">
+          <h1 class="modal__title" id="rulesTitle">С днём рождения, <span data-name></span>!</h1>
+          <p>Сбей все звёзды уровня: каждая откроет свой кусочек поздравления.</p>
+          <ul class="modal__list">
+            <li>Звёзды летят справа налево. Ты стоишь слева.</li>
+            <li>Кнопки со стрелками переводят тебя между тремя дорожками (на клавиатуре стрелки).</li>
+            <li>Кнопка с прицелом стреляет вправо (на клавиатуре пробел).</li>
+            <li>Если звезда долетит до тебя, уровень начнётся заново. Тап по полю перезапускает его.</li>
+          </ul>
+          <button class="btn" id="startBtn" type="button">Старт</button>
+        </div>
+      </div>
 
-    <script src="js/main.js"></script>
+      <div class="dim"></div>
+    <div class="done" id="done">
+      <h2 class="done__title">Уровень 1 пройден!</h2>
+      <a class="btn" id="nextBtn" href="level2.html">Следующий уровень</a>
+    </div>
+    </div>
+
+    <script src="js/fragments.js"></script>
+    <script src="js/game.js"></script>
   </body>
 </html>

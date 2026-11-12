@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Уровень 3 — с днём рождения!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&family=Unbounded:wght@600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body data-level="3" data-from="13" data-to="18">
+    <div class="bg" style="background-image: url('assets/bg3.jpg')"></div>
+
+    <div class="app" id="app">
+      <!-- Шапка: инструкция и счётчик -->
+      <header class="top">
+        <p class="top__guide">Сбивай звёзды: «вверх» и «вниз» меняют дорожку, кнопка с прицелом стреляет.</p>
+        <div class="top__count">#<span id="count">0</span>/<span id="total">18</span> ☆</div>
+      </header>
+
+      <!-- Игровое поле -->
+      <div class="field" id="field" style="background-image: url('assets/bg3.jpg')">
+        <canvas id="canvas"></canvas>
+        <div class="over" id="over" hidden>
+          <h2 class="over__title">Игра окончена</h2>
+          <p>Звезда долетела до тебя. Тапни по полю, чтобы начать уровень заново.</p>
+        </div>
+      </div>
+
+      <!-- Управление -->
+      <div class="controls" id="controls">
+        <div class="controls__move">
+          <button class="pad pad--move" id="upBtn" type="button" aria-label="Вверх"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 L3 14 H9 V21 H15 V14 H21 Z" fill="currentColor"/></svg></button>
+          <button class="pad pad--move" id="downBtn" type="button" aria-label="Вниз"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21 L3 10 H9 V3 H15 V10 H21 Z" fill="currentColor"/></svg></button>
+        </div>
+        <button class="pad pad--fire" id="fireBtn" type="button" aria-label="Огонь"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="6.5"/><path d="M12 2v6M12 16v6M2 12h6M16 12h6"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg></button>
+      </div>
+
+      <!-- Собранные фрагменты поздравления -->
+      <section class="panel" aria-label="Фрагменты поздравления">
+        <ol class="chips" id="chips"></ol>
+      </section>
+
+      <!-- Правила -->
+      <div class="backdrop" id="rules">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="rulesTitle">
+          <h1 class="modal__title" id="rulesTitle">Уровень 3 из 3</h1>
+          <p>Сбей все звёзды уровня: каждая откроет свой кусочек поздравления.</p>
+          <ul class="modal__list">
+            <li>Звёзды летят справа налево. Ты стоишь слева.</li>
+            <li>Кнопки со стрелками переводят тебя между тремя дорожками (на клавиатуре стрелки).</li>
+            <li>Кнопка с прицелом стреляет вправо (на клавиатуре пробел).</li>
+            <li>Если звезда долетит до тебя, уровень начнётся заново. Тап по полю перезапускает его.</li>
+          </ul>
+          <button class="btn" id="startBtn" type="button">Старт</button>
+        </div>
+      </div>
+
+      <div class="dim"></div>
+    <section class="win" id="win" aria-live="polite">
+      <div class="win__bg"></div>
+      <div class="win__content">
+        <div class="win__text">
+          <h2 class="win__title">С Днем рождения!</h2>
+          <p class="win__message" id="finalText"></p>
+        </div>
+        <div class="dragon" id="dragon">
+          <svg viewBox="0 0 420 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Дракон">
+              <!-- хвост -->
+              <path d="M320 225 C375 245 405 215 398 175 C418 225 395 275 322 258 Z" fill="#ff5fa6" />
+              <path d="M392 178 L412 160 L404 190 Z" fill="#ffe45c" />
+              <!-- задняя нога -->
+              <path d="M268 238 L266 288 L300 288 L304 238 Z" fill="#e0408a" />
+              <!-- крыло -->
+              <g id="wing">
+                <path d="M228 128 C240 56 312 22 372 34 C346 60 342 92 338 126 C318 104 292 104 272 130 C262 112 244 114 228 128 Z" fill="#ffe45c" />
+                <path d="M300 112 L350 44 M272 130 L322 50" stroke="#e0b800" stroke-width="3" fill="none" />
+              </g>
+              <!-- туловище -->
+              <path d="M148 172 C148 118 232 100 292 130 C344 156 362 204 332 234 C300 264 190 254 148 212 Z" fill="#ff7ab6" />
+              <path d="M160 214 C200 252 300 262 330 236 C300 244 200 240 160 214 Z" fill="#ffe45c" />
+              <!-- шея и голова -->
+              <path d="M170 168 C150 124 118 100 92 104 L44 110 C30 112 26 128 40 133 L84 142 C102 152 118 178 140 208 Z" fill="#ff7ab6" />
+              <path d="M44 132 L84 142 C96 148 106 160 114 172 C90 158 70 148 44 140 Z" fill="#ffe45c" />
+              <!-- рог и глаз -->
+              <path d="M98 102 L130 66 L120 106 Z" fill="#ffe45c" />
+              <circle cx="88" cy="116" r="6" fill="#14123a" />
+              <circle cx="90" cy="114" r="2" fill="#fff" />
+              <!-- гребень -->
+              <path d="M150 128 L156 108 L166 128 Z M178 112 L186 92 L194 114 Z M210 104 L220 86 L228 108 Z" fill="#ffe45c" />
+              <!-- передняя нога -->
+              <path d="M196 244 L192 292 L228 292 L232 248 Z" fill="#ff7ab6" />
+              <!-- пасть: отсюда вылетает огонь -->
+              <circle id="mouth" cx="38" cy="124" r="4" fill="none" />
+            </svg>
+        </div>
+      </div>
+      <canvas class="fire" id="fire"></canvas>
+    </section>
+    </div>
+
+    <script src="js/fragments.js"></script>
+    <script src="js/game.js"></script>
+  </body>
+</html>
