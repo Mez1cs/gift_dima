@@ -2,7 +2,7 @@
   const TOTAL = FRAGMENTS.length // 18
   const HIGHLIGHT_MS = 1800
   const FIRE_COOLDOWN_MS = 260
-  const BALLOON_SPEED = 0.11 // доля ширины поля в секунду
+  const BALLOON_SPEED = 0.25 // доля ширины поля в секунду
   const BULLET_SPEED = 1.2
   const TAU = Math.PI * 2
   const STORAGE_KEY = 'gift_dima_progress'
