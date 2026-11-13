@@ -2,10 +2,7 @@
 <html lang="ru">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Уровень 2 — с днём рождения!</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -21,8 +18,8 @@
     <div class="app" id="app">
       <!-- Шапка: инструкция и счётчик -->
       <header class="top">
-        <p class="top__guide">Сбивай звёзды: «вверх» и «вниз» меняют дорожку, кнопка с прицелом стреляет.</p>
-        <div class="top__count">#<span id="count">0</span>/<span id="total">18</span> ☆</div>
+        <p class="top__guide">Стрелки ↑ ↓ на клавиатуре меняют дорожку, пробел стреляет (можно и кнопками под полем). Сбивай шарики: каждый откроет кусочек поздравления.</p>
+        <div class="top__count"><span id="count">0</span>/<span id="total">18</span> 🎈</div>
       </header>
 
       <!-- Игровое поле -->
@@ -30,7 +27,7 @@
         <canvas id="canvas"></canvas>
         <div class="over" id="over" hidden>
           <h2 class="over__title">Игра окончена</h2>
-          <p>Звезда долетела до тебя. Тапни по полю, чтобы начать уровень заново.</p>
+          <p>Шарик долетел до тебя. Тапни по полю, чтобы начать уровень заново.</p>
         </div>
       </div>
 
@@ -48,20 +45,6 @@
         <ol class="chips" id="chips"></ol>
       </section>
 
-      <!-- Правила -->
-      <div class="backdrop" id="rules">
-        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="rulesTitle">
-          <h1 class="modal__title" id="rulesTitle">Уровень 2 из 3</h1>
-          <p>Сбей все звёзды уровня: каждая откроет свой кусочек поздравления.</p>
-          <ul class="modal__list">
-            <li>Звёзды летят справа налево. Ты стоишь слева.</li>
-            <li>Кнопки со стрелками переводят тебя между тремя дорожками (на клавиатуре стрелки).</li>
-            <li>Кнопка с прицелом стреляет вправо (на клавиатуре пробел).</li>
-            <li>Если звезда долетит до тебя, уровень начнётся заново. Тап по полю перезапускает его.</li>
-          </ul>
-          <button class="btn" id="startBtn" type="button">Старт</button>
-        </div>
-      </div>
 
       <div class="dim"></div>
     <div class="done" id="done">

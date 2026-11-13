@@ -2,11 +2,8 @@
 <html lang="ru">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
-    <title>Уровень 1 — с днём рождения!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>С днём рождения, Дима!</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -15,62 +12,29 @@
     />
     <link rel="stylesheet" href="css/style.css" />
   </head>
-  <body data-level="1" data-from="1" data-to="6" data-next="level2.html">
+  <body>
     <div class="bg" style="background-image: url('assets/bg1.jpg')"></div>
 
-    <div class="app" id="app">
-      <!-- Шапка: инструкция и счётчик -->
-      <header class="top">
-        <p class="top__guide">Сбивай звёзды: «вверх» и «вниз» меняют дорожку, кнопка с прицелом стреляет.</p>
-        <div class="top__count">#<span id="count">0</span>/<span id="total">18</span> ☆</div>
-      </header>
+    <main class="hub">
+      <div class="hub__card">
+        <div class="hub__text">
+          <h1 class="hub__title">С днём рождения, Дима!</h1>
+          <p>Мы приготовили для тебя мини-игру. Пройди три уровня, и из шариков соберётся поздравление.</p>
 
-      <!-- Игровое поле -->
-      <div class="field" id="field" style="background-image: url('assets/bg1.jpg')">
-        <canvas id="canvas"></canvas>
-        <div class="over" id="over" hidden>
-          <h2 class="over__title">Игра окончена</h2>
-          <p>Звезда долетела до тебя. Тапни по полю, чтобы начать уровень заново.</p>
-        </div>
-      </div>
-
-      <!-- Управление -->
-      <div class="controls" id="controls">
-        <div class="controls__move">
-          <button class="pad pad--move" id="upBtn" type="button" aria-label="Вверх"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 L3 14 H9 V21 H15 V14 H21 Z" fill="currentColor"/></svg></button>
-          <button class="pad pad--move" id="downBtn" type="button" aria-label="Вниз"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21 L3 10 H9 V3 H15 V10 H21 Z" fill="currentColor"/></svg></button>
-        </div>
-        <button class="pad pad--fire" id="fireBtn" type="button" aria-label="Огонь"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="6.5"/><path d="M12 2v6M12 16v6M2 12h6M16 12h6"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg></button>
-      </div>
-
-      <!-- Собранные фрагменты поздравления -->
-      <section class="panel" aria-label="Фрагменты поздравления">
-        <ol class="chips" id="chips"></ol>
-      </section>
-
-      <!-- Правила -->
-      <div class="backdrop" id="rules">
-        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="rulesTitle">
-          <h1 class="modal__title" id="rulesTitle">С днём рождения, <span data-name></span>!</h1>
-          <p>Сбей все звёзды уровня: каждая откроет свой кусочек поздравления.</p>
-          <ul class="modal__list">
-            <li>Звёзды летят справа налево. Ты стоишь слева.</li>
-            <li>Кнопки со стрелками переводят тебя между тремя дорожками (на клавиатуре стрелки).</li>
-            <li>Кнопка с прицелом стреляет вправо (на клавиатуре пробел).</li>
-            <li>Если звезда долетит до тебя, уровень начнётся заново. Тап по полю перезапускает его.</li>
+          <h2 class="hub__subtitle">Как играть</h2>
+          <ul class="hub__list">
+            <li>Шарики летят справа налево, а герой стоит слева.</li>
+            <li>Стрелки ↑ и ↓ на клавиатуре переводят героя между тремя дорожками.</li>
+            <li>Пробел стреляет вправо. Всё то же самое можно делать кнопками под полем.</li>
+            <li>Каждый сбитый шарик открывает свой кусочек поздравления.</li>
+            <li>Если шарик долетит до героя, уровень начнётся заново. Клик по полю перезапускает его.</li>
+            <li>Сбей все шарики уровня, и появится кнопка перехода на следующий.</li>
           </ul>
-          <button class="btn" id="startBtn" type="button">Старт</button>
+
+          <a class="btn" href="level1.html">Начать игру</a>
         </div>
+        <img class="hub__hero" src="assets/player.png" alt="Герой с миниганом" />
       </div>
-
-      <div class="dim"></div>
-    <div class="done" id="done">
-      <h2 class="done__title">Уровень 1 пройден!</h2>
-      <a class="btn" id="nextBtn" href="level2.html">Следующий уровень</a>
-    </div>
-    </div>
-
-    <script src="js/fragments.js"></script>
-    <script src="js/game.js"></script>
+    </main>
   </body>
 </html>

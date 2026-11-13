@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Уровень 1 — с днём рождения!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&family=Unbounded:wght@600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body data-level="1" data-from="1" data-to="6" data-next="level2.html">
+    <div class="bg" style="background-image: url('assets/bg1.jpg')"></div>
+
+    <div class="app" id="app">
+      <!-- Шапка: инструкция и счётчик -->
+      <header class="top">
+        <p class="top__guide">Стрелки ↑ ↓ на клавиатуре меняют дорожку, пробел стреляет (можно и кнопками под полем). Сбивай шарики: каждый откроет кусочек поздравления.</p>
+        <div class="top__count"><span id="count">0</span>/<span id="total">18</span> 🎈</div>
+      </header>
+
+      <!-- Игровое поле -->
+      <div class="field" id="field" style="background-image: url('assets/bg1.jpg')">
+        <canvas id="canvas"></canvas>
+        <div class="over" id="over" hidden>
+          <h2 class="over__title">Игра окончена</h2>
+          <p>Шарик долетел до тебя. Тапни по полю, чтобы начать уровень заново.</p>
+        </div>
+      </div>
+
+      <!-- Управление -->
+      <div class="controls" id="controls">
+        <div class="controls__move">
+          <button class="pad pad--move" id="upBtn" type="button" aria-label="Вверх"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 L3 14 H9 V21 H15 V14 H21 Z" fill="currentColor"/></svg></button>
+          <button class="pad pad--move" id="downBtn" type="button" aria-label="Вниз"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21 L3 10 H9 V3 H15 V10 H21 Z" fill="currentColor"/></svg></button>
+        </div>
+        <button class="pad pad--fire" id="fireBtn" type="button" aria-label="Огонь"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="6.5"/><path d="M12 2v6M12 16v6M2 12h6M16 12h6"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg></button>
+      </div>
+
+      <!-- Собранные фрагменты поздравления -->
+      <section class="panel" aria-label="Фрагменты поздравления">
+        <ol class="chips" id="chips"></ol>
+      </section>
+
+
+      <div class="dim"></div>
+    <div class="done" id="done">
+      <h2 class="done__title">Уровень 1 пройден!</h2>
+      <a class="btn" id="nextBtn" href="level2.html">Следующий уровень</a>
+    </div>
+    </div>
+
+    <script src="js/fragments.js"></script>
+    <script src="js/game.js"></script>
+  </body>
+</html>

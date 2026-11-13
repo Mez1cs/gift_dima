@@ -1,9 +1,9 @@
 :root {
-  --night: #0b1030;
+  --black: #0a0612;
+  --purple: #b88cff; /* акцент вместо жёлтого */
+  --hub-bg: #8c53f2; /* фон карточки главной страницы */
   --line: #3dff8f; /* границы игрового поля */
   --pad: #ff3df0; /* кнопки управления */
-  --lemon: #ffe45c;
-  --deep: #1a27a8;
   --white: #ffffff;
 
   --font-display: 'Unbounded', system-ui, sans-serif;
@@ -24,7 +24,6 @@ html,
 body {
   height: 100%;
   margin: 0;
-  overflow: hidden;
 }
 
 body {
@@ -32,11 +31,11 @@ body {
   font-size: 1rem;
   line-height: 1.5;
   color: var(--white);
-  background: var(--night);
+  background: var(--black);
 }
 
 :focus-visible {
-  outline: 3px solid var(--lemon);
+  outline: 3px solid var(--purple);
   outline-offset: 3px;
 }
 
@@ -49,44 +48,53 @@ body {
   filter: blur(6px) brightness(0.4);
 }
 
-/* ---------- Каркас: одна колонка, как на макете ---------- */
+/* ---------- Каркас: поле слева, фрагменты справа ---------- */
 .app {
   position: relative;
   z-index: 1;
-  display: flex;
-  flex-direction: column;
-  width: min(100%, 520px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(280px, 26vw, 400px);
+  grid-template-rows: auto auto 1fr;
+  column-gap: 1.5rem;
+  width: min(100%, 1500px);
+  height: 100vh;
   height: 100dvh;
+  min-height: 600px;
   margin: 0 auto;
+  padding: 0 2rem 1.5rem;
 }
 
 .top {
+  grid-column: 1 / -1;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.8rem;
-  min-height: 4.2rem;
-  padding: 0.6rem 1rem;
+  gap: 1.5rem;
+  padding: 1rem 0;
 }
 
 .top__guide {
+  max-width: 48rem;
   margin: 0;
-  font-size: 0.82rem;
-  line-height: 1.35;
+  font-size: 0.95rem;
+  line-height: 1.4;
 }
 
 .top__count {
   flex: none;
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 1.05rem;
-  color: var(--lemon);
+  font-size: 1.4rem;
+  color: var(--purple);
   white-space: nowrap;
 }
 
 .field {
   position: relative;
-  flex: 0 0 clamp(210px, 36dvh, 360px);
+  grid-column: 1;
+  grid-row: 2;
+  height: clamp(320px, calc(100vh - 250px), 760px);
+  height: clamp(320px, calc(100dvh - 250px), 760px);
   overflow: hidden;
   background-size: cover;
   background-position: center;
@@ -105,18 +113,18 @@ body {
 
 /* ---------- Кнопки управления ---------- */
 .controls {
-  position: relative;
-  z-index: 2;
+  grid-column: 1;
+  grid-row: 3;
+  align-self: start;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
-  padding: 0.7rem 1rem 0;
+  padding-top: 1rem;
 }
 
 .controls__move {
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.7rem;
 }
 
 .pad {
@@ -137,20 +145,23 @@ body {
   height: 1.7rem;
 }
 
+.pad:hover {
+  background: rgba(255, 61, 240, 0.28);
+}
+
 .pad:active {
-  background: rgba(255, 61, 240, 0.4);
+  background: rgba(255, 61, 240, 0.45);
 }
 
 .pad--move {
-  width: 5.2rem;
-  height: 3.1rem;
-  border-radius: 0.45rem;
+  width: 6.4rem;
+  height: 3.4rem;
+  border-radius: 0.5rem;
 }
 
 .pad--fire {
-  width: 5.6rem;
-  height: 5.6rem;
-  margin-top: -0.2rem;
+  width: 5.4rem;
+  height: 5.4rem;
   border-width: 4px;
   border-radius: 0.6rem;
 }
@@ -162,12 +173,12 @@ body {
 
 /* ---------- Панель с фрагментами ---------- */
 .panel {
-  flex: 1;
+  grid-column: 2;
+  grid-row: 2 / 4;
   min-height: 0;
-  margin: 0.8rem 1rem 1rem;
-  padding: 0.7rem;
+  padding: 0.9rem;
   overflow: auto;
-  background: rgba(8, 10, 30, 0.5);
+  background: rgba(10, 6, 20, 0.55);
   border: 2px solid var(--white);
   border-radius: 0.9rem;
 }
@@ -175,25 +186,25 @@ body {
 .chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.45rem;
+  gap: 0.5rem;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
 .chip {
-  padding: 0.3rem 0.6rem;
-  font-size: 0.88rem;
+  padding: 0.3rem 0.65rem;
+  font-size: 0.95rem;
   line-height: 1.35;
-  color: #c4c9de;
-  background: rgba(160, 165, 190, 0.25);
-  border: 2px solid rgba(200, 205, 225, 0.5);
+  color: #c9c4d6;
+  background: rgba(160, 165, 190, 0.22);
+  border: 2px solid rgba(200, 205, 225, 0.45);
   border-radius: 0.45rem;
   transition: background 0.25s ease, color 0.25s ease;
 }
 
 .chip--empty {
-  min-width: 2.8rem;
+  min-width: 2.6rem;
   text-align: center;
   opacity: 0.75;
 }
@@ -204,19 +215,19 @@ body {
 }
 
 .chip--open b {
-  margin-right: 0.35rem;
-  color: var(--lemon);
+  margin-right: 0.4rem;
+  color: var(--purple);
 }
 
 .chip--new {
-  color: var(--deep);
-  background: var(--lemon);
-  border-color: var(--lemon);
+  color: var(--black);
+  background: var(--purple);
+  border-color: var(--purple);
   animation: chip-in 0.25s ease-out;
 }
 
 .chip--new b {
-  color: var(--deep);
+  color: var(--black);
 }
 
 @keyframes chip-in {
@@ -235,10 +246,10 @@ body {
   z-index: 4;
   display: grid;
   place-content: center;
-  gap: 0.4rem;
+  gap: 0.5rem;
   padding: 1rem;
   text-align: center;
-  background: rgba(11, 16, 48, 0.75);
+  background: rgba(10, 6, 20, 0.75);
   cursor: pointer;
 }
 
@@ -246,82 +257,114 @@ body {
   margin: 0;
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 1.5rem;
+  font-size: 2rem;
   color: var(--pad);
 }
 
 .over p {
   margin: 0;
-  font-size: 0.95rem;
+  font-size: 1.05rem;
 }
 
-/* ---------- Окно с правилами ---------- */
-.backdrop {
-  position: absolute;
-  inset: 0;
-  z-index: 20;
-  display: grid;
-  place-items: center;
-  background: rgba(11, 16, 48, 0.6);
-}
-
-.modal {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 0.8rem;
-  width: 88%;
-  height: 75%;
-  padding: 1.2rem;
-  overflow: auto;
-  color: var(--deep);
-  background: var(--lemon);
-  border-radius: 1.3rem;
-}
-
-.modal p {
-  margin: 0;
-}
-
-.modal__title {
-  margin: 0;
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(1.3rem, 6vw, 1.9rem);
-  line-height: 1.15;
-}
-
-.modal__list {
-  margin: 0;
-  padding-left: 1.2rem;
-}
-
-.modal__list li + li {
-  margin-top: 0.35rem;
-}
-
+/* ---------- Кнопки ---------- */
 .btn {
+  display: inline-block;
   padding: 0.95rem 2rem;
   font-family: var(--font-display);
   font-weight: 800;
   font-size: 1rem;
   color: var(--white);
   text-decoration: none;
-  background: var(--deep);
+  background: var(--black);
   border: 0;
   border-radius: 999px;
   cursor: pointer;
-  touch-action: manipulation;
+  transition: transform 0.15s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
 }
 
 .btn:active {
-  transform: translateY(2px);
+  transform: translateY(1px);
+}
+
+/* ---------- Главная страница (хаб) ---------- */
+.hub {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 2rem;
+}
+
+.hub__card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1rem 2.5rem;
+  width: min(100%, 980px);
+  margin: 0 auto;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  color: var(--black);
+  background: var(--hub-bg);
+  border-radius: 1.6rem;
+}
+
+.hub__text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+.hub__text p {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.hub__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.8rem, 3.6vw, 2.8rem);
+  line-height: 1.15;
+}
+
+.hub__subtitle {
+  margin: 0.3rem 0 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.15rem;
+}
+
+.hub__list {
+  max-width: 34rem;
+  margin: 0;
+  padding-left: 1.3rem;
+  font-size: 1.05rem;
+  text-align: left;
+}
+
+.hub__list li + li {
+  margin-top: 0.45rem;
+}
+
+.hub__hero {
+  display: block;
+  width: auto;
+  height: clamp(260px, 52vh, 460px);
 }
 
 /* ---------- Конец уровня и финал ---------- */
 .dim {
-  position: absolute;
+  position: fixed;
   inset: 0;
   z-index: 21;
   background: rgba(0, 0, 0, 0.3);
@@ -341,13 +384,13 @@ body {
 }
 
 .done {
-  position: absolute;
+  position: fixed;
   inset: 0;
   z-index: 22;
   display: grid;
   place-content: center;
   justify-items: center;
-  gap: 1rem;
+  gap: 1.2rem;
   padding: 1.5rem;
   text-align: center;
   opacity: 0;
@@ -364,21 +407,22 @@ body {
   margin: 0;
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(1.6rem, 7vw, 2.3rem);
+  font-size: clamp(2rem, 4vw, 3rem);
   line-height: 1.15;
-  color: var(--lemon);
+  color: var(--purple);
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
 }
 
 .done .btn {
+  color: var(--black);
   background: var(--pad);
-  color: var(--night);
 }
 
 .win {
-  position: absolute;
+  position: fixed;
   inset: 0;
   z-index: 23;
+  overflow: auto;
   opacity: 0;
   pointer-events: none;
   transition: opacity 1s ease 0.7s;
@@ -389,69 +433,60 @@ body {
   pointer-events: auto;
 }
 
+/* тот же тёмный размытый фон, что и у остальных экранов */
 .win__bg {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at 70% 85%, #4a2fb0 0%, var(--night) 70%);
+  position: fixed;
+  inset: -12px;
+  background-size: cover;
+  background-position: center;
+  filter: blur(6px) brightness(0.4);
 }
 
 .win__content {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 2.5rem;
+  width: min(100%, 1500px);
+  min-height: 100%;
+  margin: 0 auto;
+  padding: 2rem 3rem;
 }
 
-.win__text {
-  flex: 1;
-  min-height: 0;
-  padding: 1.2rem 1.2rem 0.5rem;
-  overflow: auto;
+/* Сцена с «18» и драконом */
+.stage {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  max-height: 80vh;
+  max-height: 80dvh;
+  overflow: hidden;
+  background-color: #0d0820;
+  background-size: cover;
+  background-position: left center;
+  border-top: 3px solid #a64dff;
+  border-bottom: 3px solid #a64dff;
+  box-shadow: 0 0 16px rgba(166, 77, 255, 0.5);
 }
 
-.win__title {
-  margin: 0 0 1rem;
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(1.9rem, 9vw, 2.9rem);
-  line-height: 1.1;
-  color: var(--lemon);
-}
-
-.win__message {
-  margin: 0;
-  font-size: 1.05rem;
-  line-height: 1.7;
-}
-
-.dragon {
-  flex: none;
-  align-self: flex-end;
-  width: min(82%, 420px);
-  margin: 0 2% 1%;
-  transform-origin: 70% 90%;
-  animation: sway 4s ease-in-out infinite;
-}
-
-.dragon svg {
-  display: block;
-  width: 100%;
-  height: auto;
-  max-height: 36dvh;
-}
-
-#wing {
-  transform-box: fill-box;
-  transform-origin: 15% 100%;
-  animation: flap 1.8s ease-in-out infinite;
-}
-
-.fire {
+.blast {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
+  z-index: 2;
   pointer-events: none;
+}
+
+.dragon {
+  position: absolute;
+  right: 2%;
+  bottom: 6%;
+  z-index: 1;
+  height: 64%;
+  width: auto;
+  transform-origin: 70% 90%;
+  animation: sway 4s ease-in-out infinite;
 }
 
 @keyframes sway {
@@ -464,20 +499,98 @@ body {
   }
 }
 
-@keyframes flap {
-  0%,
-  100% {
-    transform: rotate(-5deg);
-  }
-  50% {
-    transform: rotate(9deg);
-  }
+.win__side {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-height: 0;
+}
+
+.win__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.4rem, 2.4vw, 2rem);
+  line-height: 1.2;
+  text-align: center;
+  color: var(--line);
+}
+
+.win__box {
+  max-height: 60vh;
+  max-height: 60dvh;
+  padding: 1rem 1.2rem;
+  overflow: auto;
+  background: rgba(10, 6, 20, 0.6);
+  border: 2px solid var(--white);
+  border-radius: 0.9rem;
+}
+
+.win__text p {
+  margin: 0 0 0.9rem;
+  font-size: 1.1rem;
+  line-height: 1.65;
+}
+
+.win__text .win__ps {
+  margin: 0;
+  color: #ffb3e6;
+  font-style: italic;
+}
+
+.win__footer {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1rem, 1.6vw, 1.3rem);
+  text-align: center;
+  color: var(--line);
 }
 
 @media (prefers-reduced-motion: reduce) {
   .dragon,
-  #wing,
   .chip--new {
     animation: none;
+  }
+}
+
+/* ---------- Узкие окна: всё в одну колонку ---------- */
+@media (max-width: 820px) {
+  .app {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto;
+    height: auto;
+    min-height: 100dvh;
+    padding: 0 1rem 1rem;
+  }
+
+  .top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+
+  .field {
+    height: clamp(220px, 36dvh, 360px);
+  }
+
+  .panel {
+    grid-column: 1;
+    grid-row: 4;
+    max-height: 40dvh;
+    margin-top: 1rem;
+  }
+
+  .hub__card {
+    grid-template-columns: 1fr;
+  }
+
+  .hub__hero {
+    display: none;
+  }
+
+  .win__content {
+    grid-template-columns: 1fr;
+    padding: 1rem;
   }
 }
